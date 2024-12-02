@@ -7,7 +7,7 @@ import (
 	"github.com/maksym-shvaiuk/golang-binary-search-tree/golang_binary_tree"
 )
 
-const printTreesInUnitTests = true
+const printTreesInUnitTests = false
 
 type TestLogger struct {
 }
