@@ -26,3 +26,7 @@ go.work.sum
 
 # goland IDE files
 .idea
+
+# profiling files
+cpu.out
+mem.out
