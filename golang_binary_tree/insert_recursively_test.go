@@ -1,25 +1,12 @@
 package golang_binary_tree_test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/maksym-shvaiuk/golang-binary-search-tree/golang_binary_tree"
 )
 
-const printTreesInUnitTests = true
-
-type TestLogger struct {
-}
-
-func (l *TestLogger) Print(str string) {
-	if !printTreesInUnitTests {
-		return
-	}
-	fmt.Println(str)
-}
-
-func TestInsertIterativeBasicScenario(t *testing.T) {
+func TestInsertRecursivelyBasicScenario(t *testing.T) {
 	// Comparison function for integers
 	intCmp := func(a, b int) int {
 		if a > b {
@@ -32,7 +19,7 @@ func TestInsertIterativeBasicScenario(t *testing.T) {
 
 	// Create a new tree
 	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
 
 	// Insert a single value
 	err := tree.Insert(5)
@@ -70,8 +57,8 @@ func TestInsertIterativeBasicScenario(t *testing.T) {
 	tree.PrintTree(&TestLogger{})
 }
 
-// TestInsertIterativeIntoEmptyTree checks insertion into an empty tree.
-func TestInsertIterativeIntoEmptyTree(t *testing.T) {
+// TestInsertRecursivelyIntoEmptyTree checks insertion into an empty tree.
+func TestInsertRecursivelyIntoEmptyTree(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -82,7 +69,7 @@ func TestInsertIterativeIntoEmptyTree(t *testing.T) {
 	}
 
 	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
 	err := tree.Insert(10)
 	if err != nil {
 		t.Fatalf("Insert failed with error: %v", err)
@@ -92,8 +79,8 @@ func TestInsertIterativeIntoEmptyTree(t *testing.T) {
 	}
 }
 
-// TestInsertIterativeDuplicateValues checks insertion of duplicate values.
-func TestInsertIterativeDuplicateValues(t *testing.T) {
+// TestInsertRecursivelyDuplicateValues checks insertion of duplicate values.
+func TestInsertRecursivelyDuplicateValues(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -104,7 +91,7 @@ func TestInsertIterativeDuplicateValues(t *testing.T) {
 	}
 
 	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
 	_ = tree.Insert(10)
 	err := tree.Insert(10)
 	if err != nil {
@@ -115,8 +102,8 @@ func TestInsertIterativeDuplicateValues(t *testing.T) {
 	}
 }
 
-// TestInsertIterativeLargerValues checks insertion of values larger than the root.
-func TestInsertIterativeLargerValues(t *testing.T) {
+// TestInsertRecursivelyLargerValues checks insertion of values larger than the root.
+func TestInsertRecursivelyLargerValues(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -127,7 +114,7 @@ func TestInsertIterativeLargerValues(t *testing.T) {
 	}
 
 	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
 	_ = tree.Insert(10)
 	err := tree.Insert(20)
 	if err != nil {
@@ -138,8 +125,8 @@ func TestInsertIterativeLargerValues(t *testing.T) {
 	}
 }
 
-// TestInsertIterativeSmallerValues checks insertion of values smaller than the root.
-func TestInsertIterativeSmallerValues(t *testing.T) {
+// TestInsertRecursivelySmallerValues checks insertion of values smaller than the root.
+func TestInsertRecursivelySmallerValues(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -150,7 +137,7 @@ func TestInsertIterativeSmallerValues(t *testing.T) {
 	}
 
 	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
 	_ = tree.Insert(10)
 	err := tree.Insert(5)
 	if err != nil {
@@ -161,8 +148,8 @@ func TestInsertIterativeSmallerValues(t *testing.T) {
 	}
 }
 
-// TestInsertIterativeMultipleValues checks insertion of multiple values to form a balanced tree.
-func TestInsertIterativeMultipleValues(t *testing.T) {
+// TestInsertRecursivelyMultipleValues checks insertion of multiple values to form a balanced tree.
+func TestInsertRecursivelyMultipleValues(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -173,7 +160,7 @@ func TestInsertIterativeMultipleValues(t *testing.T) {
 	}
 
 	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
 	values := []int{10, 5, 15, 3, 7, 12, 18}
 	for _, val := range values {
 		if err := tree.Insert(val); err != nil {
@@ -190,8 +177,8 @@ func TestInsertIterativeMultipleValues(t *testing.T) {
 	}
 }
 
-// TestInsertIterativeUnbalancedTree checks the behavior with a deeply unbalanced tree.
-func TestInsertIterativeUnbalancedTree(t *testing.T) {
+// TestInsertRecursivelyUnbalancedTree checks the behavior with a deeply unbalanced tree.
+func TestInsertRecursivelyUnbalancedTree(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -202,7 +189,7 @@ func TestInsertIterativeUnbalancedTree(t *testing.T) {
 	}
 
 	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
 	values := []int{1, 2, 3, 4, 5}
 	for _, val := range values {
 		if err := tree.Insert(val); err != nil {
@@ -222,8 +209,8 @@ func TestInsertIterativeUnbalancedTree(t *testing.T) {
 	}
 }
 
-// TestInsertIterativeDataFromVideoTutorial checks the behavior with a data from the video tutorial (54).
-func TestInsertIterativeDataFromVideoTutorial(t *testing.T) {
+// TestInsertRecursivelyDataFromVideoTutorial checks the behavior with a data from the video tutorial (54).
+func TestInsertRecursivelyDataFromVideoTutorial(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -234,7 +221,7 @@ func TestInsertIterativeDataFromVideoTutorial(t *testing.T) {
 	}
 
 	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
 	values := []int{60, 41, 16, 53, 46, 55, 42, 54}
 	for _, val := range values {
 		if err := tree.Insert(val); err != nil {

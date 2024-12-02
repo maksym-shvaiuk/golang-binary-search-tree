@@ -22,12 +22,20 @@ func (tree *Tree[T]) GetRoot() *Node[T] {
 // NOTE: Inserts a value.
 // The insertion algo (iterative vs recursive) is defined
 func (tree *Tree[T]) Insert(value T) error {
+	if tree.cmp == nil {
+		return ErrorCmpFunctionIsNil
+	}
+
 	switch tree.algo {
 	case AlgoIterative:
-		return tree.insertIterative(value)
+		tree.insertIterative(value)
+	case AlgoRecursive:
+		tree.insertRecursively(value)
 	default:
-		return tree.insertIterative(value)
+		tree.insertIterative(value)
 	}
+
+	return nil
 }
 
 // NOTE: Prints the tree in a structured, human-readable format.
