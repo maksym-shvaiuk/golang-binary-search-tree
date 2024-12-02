@@ -1,4 +1,4 @@
-package golang_binary_tree
+package binsrch_tree
 
 // NOTE: Inserts a value iteratively.
 // No recursion to avoid stack overflow on huge trees.

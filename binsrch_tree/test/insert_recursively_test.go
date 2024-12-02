@@ -3,7 +3,7 @@ package golang_binary_tree_test
 import (
 	"testing"
 
-	"github.com/maksym-shvaiuk/golang-binary-search-tree/golang_binary_tree"
+	"github.com/maksym-shvaiuk/golang-binary-search-tree/binsrch_tree"
 )
 
 func TestInsertRecursivelyBasicScenario(t *testing.T) {
@@ -18,8 +18,8 @@ func TestInsertRecursivelyBasicScenario(t *testing.T) {
 	}
 
 	// Create a new tree
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoRecursive)
 
 	// Insert a single value
 	err := tree.Insert(5)
@@ -68,8 +68,8 @@ func TestInsertRecursivelyIntoEmptyTree(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoRecursive)
 	err := tree.Insert(10)
 	if err != nil {
 		t.Fatalf("Insert failed with error: %v", err)
@@ -90,8 +90,8 @@ func TestInsertRecursivelyDuplicateValues(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoRecursive)
 	_ = tree.Insert(10)
 	err := tree.Insert(10)
 	if err != nil {
@@ -113,8 +113,8 @@ func TestInsertRecursivelyLargerValues(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoRecursive)
 	_ = tree.Insert(10)
 	err := tree.Insert(20)
 	if err != nil {
@@ -136,8 +136,8 @@ func TestInsertRecursivelySmallerValues(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoRecursive)
 	_ = tree.Insert(10)
 	err := tree.Insert(5)
 	if err != nil {
@@ -159,8 +159,8 @@ func TestInsertRecursivelyMultipleValues(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoRecursive)
 	values := []int{10, 5, 15, 3, 7, 12, 18}
 	for _, val := range values {
 		if err := tree.Insert(val); err != nil {
@@ -188,8 +188,8 @@ func TestInsertRecursivelyUnbalancedTree(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoRecursive)
 	values := []int{1, 2, 3, 4, 5}
 	for _, val := range values {
 		if err := tree.Insert(val); err != nil {
@@ -220,8 +220,8 @@ func TestInsertRecursivelyDataFromVideoTutorial(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoRecursive)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoRecursive)
 	values := []int{60, 41, 16, 53, 46, 55, 42, 54}
 	for _, val := range values {
 		if err := tree.Insert(val); err != nil {

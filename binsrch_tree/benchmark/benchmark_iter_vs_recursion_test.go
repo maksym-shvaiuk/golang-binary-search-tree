@@ -5,11 +5,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/maksym-shvaiuk/golang-binary-search-tree/golang_binary_tree"
+	"github.com/maksym-shvaiuk/golang-binary-search-tree/binsrch_tree"
 )
 
 // We need the same dataset in all scenarious
 const dataSize = 1000000
+
 var data []int = nil
 
 func BenchmarkInsertIterative(b *testing.B) {
@@ -29,8 +30,8 @@ func BenchmarkInsertIterative(b *testing.B) {
 
 	b.Run("Iterative", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			tree := golang_binary_tree.New(intCmp)
-			tree.SetAlgo(golang_binary_tree.AlgoIterative)
+			tree := binsrch_tree.New(intCmp)
+			tree.SetAlgo(binsrch_tree.AlgoIterative)
 			for _, value := range data {
 				_ = tree.Insert(value)
 			}
@@ -55,8 +56,8 @@ func BenchmarkInsertRecursive(b *testing.B) {
 
 	b.Run("Recursive", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			tree := golang_binary_tree.New(intCmp)
-			tree.SetAlgo(golang_binary_tree.AlgoRecursive)
+			tree := binsrch_tree.New(intCmp)
+			tree.SetAlgo(binsrch_tree.AlgoRecursive)
 			for _, value := range data {
 				_ = tree.Insert(value)
 			}

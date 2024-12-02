@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/maksym-shvaiuk/golang-binary-search-tree/golang_binary_tree"
+	"github.com/maksym-shvaiuk/golang-binary-search-tree/binsrch_tree"
 )
 
 const printTreesInUnitTests = false
@@ -31,8 +31,8 @@ func TestInsertIterativeBasicScenario(t *testing.T) {
 	}
 
 	// Create a new tree
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 
 	// Insert a single value
 	err := tree.Insert(5)
@@ -81,8 +81,8 @@ func TestInsertIterativeIntoEmptyTree(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	err := tree.Insert(10)
 	if err != nil {
 		t.Fatalf("Insert failed with error: %v", err)
@@ -103,8 +103,8 @@ func TestInsertIterativeDuplicateValues(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	_ = tree.Insert(10)
 	err := tree.Insert(10)
 	if err != nil {
@@ -126,8 +126,8 @@ func TestInsertIterativeLargerValues(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	_ = tree.Insert(10)
 	err := tree.Insert(20)
 	if err != nil {
@@ -149,8 +149,8 @@ func TestInsertIterativeSmallerValues(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	_ = tree.Insert(10)
 	err := tree.Insert(5)
 	if err != nil {
@@ -172,8 +172,8 @@ func TestInsertIterativeMultipleValues(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	values := []int{10, 5, 15, 3, 7, 12, 18}
 	for _, val := range values {
 		if err := tree.Insert(val); err != nil {
@@ -201,8 +201,8 @@ func TestInsertIterativeUnbalancedTree(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	values := []int{1, 2, 3, 4, 5}
 	for _, val := range values {
 		if err := tree.Insert(val); err != nil {
@@ -233,8 +233,8 @@ func TestInsertIterativeDataFromVideoTutorial(t *testing.T) {
 		return 0
 	}
 
-	tree := golang_binary_tree.New(intCmp)
-	tree.SetAlgo(golang_binary_tree.AlgoIterative)
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	values := []int{60, 41, 16, 53, 46, 55, 42, 54}
 	for _, val := range values {
 		if err := tree.Insert(val); err != nil {

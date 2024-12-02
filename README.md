@@ -16,7 +16,7 @@ cpu: Apple M1 Max
 BenchmarkInsert/Iterative-10                 363         344528073 ns/op        24000049 B/op    1000000 allocs/op
 BenchmarkInsert/Recursive-10                 270         439224092 ns/op        24000035 B/op    1000000 allocs/op
 PASS
-ok      github.com/maksym-shvaiuk/golang-binary-search-tree/golang_binary_tree/test     321.925s
+ok      github.com/maksym-shvaiuk/golang-binary-search-tree/binsrch_tree/test     321.925s
 ```
 
 The profiling data is placed at `docs/profiling_results/insert`.
@@ -24,8 +24,8 @@ The profiling data is placed at `docs/profiling_results/insert`.
 #### How profiling data has been captured
 
 ``` bash
-go test -run=^$ -bench ^BenchmarkInsertRecursive -benchmem -benchtime=30s -cpuprofile=cpu_BenchmarkInsertRecursive.out -memprofile=mem_BenchmarkInsertRecursive.out ./golang_binary_search_tree/benchmark
-go test -run=^$ -bench ^BenchmarkInsertIterative -benchmem -benchtime=30s -cpuprofile=cpu_BenchmarkInsertIterative.out -memprofile=mem_BenchmarkInsertIterative.out ./golang_binary_search_tree/benchmark
+go test -run=^$ -bench ^BenchmarkInsertRecursive -benchmem -benchtime=30s -cpuprofile=cpu_BenchmarkInsertRecursive.out -memprofile=mem_BenchmarkInsertRecursive.out ./binsrch_tree/benchmark
+go test -run=^$ -bench ^BenchmarkInsertIterative -benchmem -benchtime=30s -cpuprofile=cpu_BenchmarkInsertIterative.out -memprofile=mem_BenchmarkInsertIterative.out ./binsrch_tree/benchmark
 ```
 
 #### How to explore it in a web-browser

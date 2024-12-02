@@ -1,1 +1,1 @@
-go test -run=^$ -bench ^BenchmarkInsert -benchmem -benchtime=10s ./golang_binary_tree/benchmark
+go test -run=^$ -bench ^BenchmarkInsert -benchmem -benchtime=10s ./binsrch_tree/benchmark

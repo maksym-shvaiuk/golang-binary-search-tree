@@ -1,4 +1,4 @@
-package golang_binary_tree
+package binsrch_tree
 
 // NOTE: Inserts a value recursively.
 func (tree *Tree[T]) insertRecursively(value T) {

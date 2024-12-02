@@ -1,4 +1,4 @@
-package golang_binary_tree
+package binsrch_tree
 
 import "errors"
 
