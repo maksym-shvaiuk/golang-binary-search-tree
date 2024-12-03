@@ -20,7 +20,8 @@ func (tree *Tree[T]) GetRoot() *Node[T] {
 }
 
 // NOTE: Inserts a value.
-// The insertion algo (iterative vs recursive) is defined
+// The insertion algo (iterative vs recursive) is defined by tree.algo.
+// Restrictions: value should not be nil.
 func (tree *Tree[T]) Insert(value T) error {
 	if tree.cmp == nil {
 		return ErrorCmpFunctionIsNil
@@ -38,7 +39,14 @@ func (tree *Tree[T]) Insert(value T) error {
 	return nil
 }
 
-// NOTE: Prints the tree in a structured, human-readable format.
+// Exists checks if a node with requested value exists in tree.
+// Returns true if node found, false otherwise.
+// Restrictions: value should not be nil.
+func (tree *Tree[T]) Exists(value T) bool {
+	return tree.existsIterative(value)
+}
+
+// PrintTree prints the tree in a structured, human-readable format.
 // The user should implement the custom logger.
 func (tree *Tree[T]) PrintTree(logger Logger) {
 	if tree.root == nil {
