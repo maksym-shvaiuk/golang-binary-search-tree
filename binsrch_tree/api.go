@@ -46,6 +46,28 @@ func (tree *Tree[T]) Exists(value T) bool {
 	return tree.existsIterative(value)
 }
 
+// MaxValue returns max value stored in tree.
+func (tree *Tree[T]) MaxValue() (T, error) {
+	if tree.root == nil {
+		// return zero value of type T
+		var res T
+		return res, ErrorTreeRootIsNil
+	}
+
+	return getMaxSubtreeNode[T](tree.root).Val, nil
+}
+
+// MinValue returns min value stored in tree.
+func (tree *Tree[T]) MinValue() (T, error) {
+	if tree.root == nil {
+		// return zero value of type T
+		var res T
+		return res, ErrorTreeRootIsNil
+	}
+
+	return getMinSubtreeNode[T](tree.root).Val, nil
+}
+
 // PrintTree prints the tree in a structured, human-readable format.
 // The user should implement the custom logger.
 func (tree *Tree[T]) PrintTree(logger Logger) {

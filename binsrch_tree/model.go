@@ -3,6 +3,7 @@ package binsrch_tree
 import "errors"
 
 var ErrorCmpFunctionIsNil = errors.New("comparison function is nil")
+var ErrorTreeRootIsNil = errors.New("root is nil")
 
 type prevMoveDirection int
 
