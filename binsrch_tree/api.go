@@ -1,6 +1,6 @@
 package binsrch_tree
 
-// Creates a tree.
+// New creates a tree.
 // By-default, the iterative algo is selected.
 // Use the SetAlgo() to change it to recursive.
 func New[T any](cmp func(a, b T) int) Tree[T] {
@@ -19,7 +19,7 @@ func (tree *Tree[T]) GetRoot() *Node[T] {
 	return tree.root
 }
 
-// NOTE: Inserts a value.
+// Insert inserts a value.
 // The insertion algo (iterative vs recursive) is defined by tree.algo.
 // Restrictions: value should not be nil.
 func (tree *Tree[T]) Insert(value T) error {
@@ -37,6 +37,28 @@ func (tree *Tree[T]) Insert(value T) error {
 	}
 
 	return nil
+}
+
+// Delete deletes a node with the value provided from the tree.
+// The deletion algo (iterative vs recursive) is defined by tree.algo.
+// Restrictions: value should not be nil.
+func (tree *Tree[T]) Delete(value T) (bool, error) {
+	var res bool
+
+	if tree.cmp == nil {
+		return res, ErrorCmpFunctionIsNil
+	}
+
+	switch tree.algo {
+	case AlgoIterative:
+		res = tree.deleteIterative(value)
+	case AlgoRecursive:
+		res = tree.deleteRecursively(value)
+	default:
+		res = tree.deleteIterative(value)
+	}
+
+	return res, nil
 }
 
 // Exists checks if a node with requested value exists in tree.

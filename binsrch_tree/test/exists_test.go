@@ -6,7 +6,7 @@ import (
 	"github.com/maksym-shvaiuk/golang-binary-search-tree/binsrch_tree"
 )
 
-func TestExistsIterativeBasicScenario(t *testing.T) {
+func TestExistsBasicScenario(t *testing.T) {
 	// Comparison function for integers
 	intCmp := func(a, b int) int {
 		if a > b {
@@ -46,7 +46,7 @@ func TestExistsIterativeBasicScenario(t *testing.T) {
 	}
 }
 
-func TestExistsIterativeEmptyTree(t *testing.T) {
+func TestExistsEmptyTree(t *testing.T) {
 	// Comparison function for integers
 	intCmp := func(a, b int) int {
 		if a > b {
@@ -67,7 +67,7 @@ func TestExistsIterativeEmptyTree(t *testing.T) {
 	}
 }
 
-func TestExistsIterativeSingleNode(t *testing.T) {
+func TestExistsSingleNode(t *testing.T) {
 	// Comparison function for integers
 	intCmp := func(a, b int) int {
 		if a > b {
@@ -98,7 +98,7 @@ func TestExistsIterativeSingleNode(t *testing.T) {
 	}
 }
 
-func TestExistsIterativeSkewedTree(t *testing.T) {
+func TestExistsSkewedTree(t *testing.T) {
 	// Comparison function for integers
 	intCmp := func(a, b int) int {
 		if a > b {

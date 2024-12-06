@@ -27,3 +27,23 @@ func getMaxSubtreeNode[T any](root *Node[T]) *Node[T] {
 
 	return root
 }
+
+// getMaxSubtreeNodeWithParent returns the pointer to the
+// rightmost (maximum) node of subtree, and it's parent node.
+// If the root node is the max node in subtree - the parent node returned is nil.
+// Returns (*maxNode, *parentNode)
+func getMaxSubtreeNodeWithParent[T any](root *Node[T]) (*Node[T], *Node[T]) {
+	if root == nil {
+		return nil, nil
+	}
+
+	maxNode := root
+	var parentNode *Node[T] = nil
+
+	for maxNode.Right != nil {
+		parentNode = maxNode
+		maxNode = maxNode.Right
+	}
+
+	return maxNode, parentNode
+}
