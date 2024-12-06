@@ -1,23 +1,23 @@
 package binsrch_tree
 
-// NOTE: Search a node with requested value in tree iteratively.
+// findNode searches for a node with requested value in tree iteratively.
 // No recursion to avoid stack overflow on huge trees.
-// Returns true if node found, false otherwise.
+// Returns pointer to node if found, nil otherwise.
 // Restrictions: value should not be nil.
-func (tree *Tree[T]) existsIterative(value T) bool {
+func (tree *Tree[T]) findNode(value T) *Node[T] {
 	current := tree.root
 
 	for {
 		// If reached leaf and didn't find the value - it not exists in tree
 		if current == nil {
-			return false
+			return nil
 		}
 
 		cmpRes := tree.cmp(value, current.Val)
 
 		// NOTE: value == current
 		if cmpRes == 0 {
-			return true
+			return current
 		}
 
 		// NOTE: value > current

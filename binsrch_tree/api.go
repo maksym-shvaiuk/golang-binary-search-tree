@@ -43,7 +43,7 @@ func (tree *Tree[T]) Insert(value T) error {
 // Returns true if node found, false otherwise.
 // Restrictions: value should not be nil.
 func (tree *Tree[T]) Exists(value T) bool {
-	return tree.existsIterative(value)
+	return tree.findNode(value) != nil
 }
 
 // MaxValue returns max value stored in tree.
