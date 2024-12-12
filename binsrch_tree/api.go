@@ -97,5 +97,5 @@ func (tree *Tree[T]) PrintTree(logger Logger) {
 		logger.Print("The tree is empty.")
 		return
 	}
-	printTreeStructure(tree.root, "", true, logger)
+	printTreeStructure(tree.root, "", true, logger, false)
 }
