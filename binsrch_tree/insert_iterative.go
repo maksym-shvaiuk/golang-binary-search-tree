@@ -21,7 +21,7 @@ func (tree *Tree[T]) insertIterative(value T) {
 	prevMove := prevMoveLeft
 
 	// NOTE: handle value == root node value case separately
-	if 0 == tree.cmp(value, tree.root.Val) {
+	if tree.cmp(value, tree.root.Val) == 0 {
 		newNode.Left = tree.root.Left
 		tree.root.Left = newNode
 		return
@@ -35,12 +35,6 @@ func (tree *Tree[T]) insertIterative(value T) {
 
 		cmpRes := tree.cmp(value, current.Val)
 
-		// NOTE: value == current
-		if cmpRes == 0 {
-			newNode.Left = current
-			insertSingleNode(prev, newNode, prevMove)
-			return
-		}
 
 		prev = current
 
@@ -51,8 +45,8 @@ func (tree *Tree[T]) insertIterative(value T) {
 			continue
 		}
 
-		// NOTE: value < current
-		if cmpRes < 0 {
+		// NOTE: value =< current
+		if cmpRes < 0 || cmpRes == 0 {
 			current = current.Left
 			prevMove = prevMoveLeft
 		}
