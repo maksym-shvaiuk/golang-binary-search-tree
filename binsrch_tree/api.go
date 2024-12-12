@@ -11,6 +11,11 @@ func New[T any](cmp func(a, b T) int) Tree[T] {
 	}
 }
 
+// Clone creates a deep copy of a tree.
+func (tree *Tree[T]) Clone() Tree[T] {
+	return tree.clone()
+}
+
 func (tree *Tree[T]) SetAlgo(algo Algo) {
 	tree.algo = algo
 }
