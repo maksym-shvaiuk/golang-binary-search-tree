@@ -1,4 +1,4 @@
-package golang_binary_tree_test
+package binsrch_tree_test
 
 import (
 	"errors"
@@ -126,7 +126,7 @@ func TestMinValueSkewedTree(t *testing.T) {
 	}
 }
 
-func TestMinValueDuplicateValues(t *testing.T) {
+func TestMinValueDuplicateValues1(t *testing.T) {
 	// Comparison function for integers
 	intCmp := func(a, b int) int {
 		if a > b {
@@ -154,6 +154,72 @@ func TestMinValueDuplicateValues(t *testing.T) {
 	}
 
 	expectedMin := 10
+	if min != expectedMin {
+		t.Fatalf("Expected min value %d, got %d", expectedMin, min)
+	}
+}
+
+func TestMinValueDuplicateValues2(t *testing.T) {
+	// Comparison function for integers
+	intCmp := func(a, b int) int {
+		if a > b {
+			return 1
+		} else if a < b {
+			return -1
+		}
+		return 0
+	}
+
+	// Create a tree with duplicate values
+	tree := binsrch_tree.New(intCmp)
+	values := []int{30, 20, 8, 20, 10, 10}
+	for _, val := range values {
+		err := tree.Insert(val)
+		if err != nil {
+			t.Fatalf("Insert failed for value %d with error: %v", val, err)
+		}
+	}
+
+	// Test MinValue
+	min, err := tree.MinValue()
+	if err != nil {
+		t.Fatalf("MinValue returned an unexpected error: %v", err)
+	}
+
+	expectedMin := 8
+	if min != expectedMin {
+		t.Fatalf("Expected min value %d, got %d", expectedMin, min)
+	}
+}
+
+func TestMinValueDuplicateValues3(t *testing.T) {
+	// Comparison function for integers
+	intCmp := func(a, b int) int {
+		if a > b {
+			return 1
+		} else if a < b {
+			return -1
+		}
+		return 0
+	}
+
+	// Create a tree with duplicate values
+	tree := binsrch_tree.New(intCmp)
+	values := []int{30, 20, 20, 20, 10, 8}
+	for _, val := range values {
+		err := tree.Insert(val)
+		if err != nil {
+			t.Fatalf("Insert failed for value %d with error: %v", val, err)
+		}
+	}
+
+	// Test MinValue
+	min, err := tree.MinValue()
+	if err != nil {
+		t.Fatalf("MinValue returned an unexpected error: %v", err)
+	}
+
+	expectedMin := 8
 	if min != expectedMin {
 		t.Fatalf("Expected min value %d, got %d", expectedMin, min)
 	}

@@ -1,6 +1,7 @@
-package golang_binary_tree_test
+package binsrch_tree_test
 
 import (
+	"math/rand"
 	"testing"
 
 	"github.com/maksym-shvaiuk/golang-binary-search-tree/binsrch_tree"
@@ -180,6 +181,15 @@ func TestDeleteIterativelyNonExistentNode(t *testing.T) {
 	}
 }
 
+// shuffleDataset creates a shuffled copy of the given dataset.
+func shuffleDataset(data []int, seed int64) []int {
+	shuffled := make([]int, len(data))
+	copy(shuffled, data)
+	rand.Seed(seed)
+	rand.Shuffle(len(shuffled), func(i, j int) { shuffled[i], shuffled[j] = shuffled[j], shuffled[i] })
+	return shuffled
+}
+
 // TestDeleteIterativelyMultipleValues tests multiple deletions in sequence.
 func TestDeleteIterativelyMultipleValues(t *testing.T) {
 	intCmp := func(a, b int) int {
@@ -193,16 +203,17 @@ func TestDeleteIterativelyMultipleValues(t *testing.T) {
 
 	tree := binsrch_tree.New(intCmp)
 	tree.SetAlgo(binsrch_tree.AlgoIterative)
-	_ = tree.Insert(10)
-	_ = tree.Insert(5)
-	_ = tree.Insert(15)
-	_ = tree.Insert(3)
-	_ = tree.Insert(7)
-	_ = tree.Insert(12)
-	_ = tree.Insert(18)
 
-	// Delete multiple values
-	valuesToDelete := []int{7, 15, 5}
+	// Insert nodes into the tree
+	values := []int{62, 83, 33, 92, 18, 83, 87, 46, 17, 41}
+	for _, val := range values {
+		_ = tree.Insert(val)
+	}
+
+	// Use constant seed to get the same result each test run
+	valuesToDelete := shuffleDataset(values, 123)
+
+	// Delete all values
 	for _, val := range valuesToDelete {
 		deleted, err := tree.Delete(val)
 		if err != nil {
@@ -214,13 +225,8 @@ func TestDeleteIterativelyMultipleValues(t *testing.T) {
 	}
 
 	// Verify remaining structure
-	if tree.GetRoot() == nil || tree.GetRoot().Val != 10 {
-		t.Fatalf("Expected root value to be 10, got: %v", tree.GetRoot())
-	}
-	if tree.GetRoot().Left == nil || tree.GetRoot().Left.Val != 3 {
-		t.Fatalf("Expected left child to be 3, got: %v", tree.GetRoot().Left)
-	}
-	if tree.GetRoot().Right == nil || tree.GetRoot().Right.Val != 12 {
-		t.Fatalf("Expected right child to be 12, got: %v", tree.GetRoot().Right)
+	root := tree.GetRoot()
+	if root != nil {
+		t.Fatalf("Expected root value to be nil")
 	}
 }

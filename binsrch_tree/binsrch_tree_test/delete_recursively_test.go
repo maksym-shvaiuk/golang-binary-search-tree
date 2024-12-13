@@ -1,4 +1,4 @@
-package golang_binary_tree_test
+package binsrch_tree_test
 
 import (
 	"testing"
@@ -180,8 +180,8 @@ func TestDeleteRecursivelyNonExistentNode(t *testing.T) {
 	}
 }
 
-// TestDeleteRecursivelyIterativeAlgorithm tests the iterative deletion algorithm.
-func TestDeleteRecursivelyIterativeAlgorithm(t *testing.T) {
+// TestDeleteRecursiveMultipleValues tests multiple deletions in sequence.
+func TestDeleteRecursiveMultipleValues(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -192,20 +192,31 @@ func TestDeleteRecursivelyIterativeAlgorithm(t *testing.T) {
 	}
 
 	tree := binsrch_tree.New(intCmp)
-	tree.SetAlgo(binsrch_tree.AlgoIterative)
-	_ = tree.Insert(10)
-	_ = tree.Insert(5)
-	_ = tree.Insert(15)
+	tree.SetAlgo(binsrch_tree.AlgoRecursive)
 
-	// Delete a value iteratively
-	deleted, err := tree.Delete(5)
-	if err != nil {
-		t.Fatalf("Delete failed with error: %v", err)
+	// Insert nodes into the tree
+	values := []int{62, 83, 33, 92, 18, 83, 87, 46, 17, 41}
+	for _, val := range values {
+		_ = tree.Insert(val)
 	}
-	if !deleted {
-		t.Fatalf("Expected value 5 to be deleted, but it was not")
+
+	// Use constant seed to get the same result each test run
+	valuesToDelete := shuffleDataset(values, 123)
+
+	// Delete all values
+	for _, val := range valuesToDelete {
+		deleted, err := tree.Delete(val)
+		if err != nil {
+			t.Fatalf("Delete failed for value %d with error: %v", val, err)
+		}
+		if !deleted {
+			t.Fatalf("Expected value %d to be deleted, but it was not", val)
+		}
 	}
-	if tree.GetRoot().Left != nil {
-		t.Fatalf("Expected left child to be nil after deletion, but got: %v", tree.GetRoot().Left)
+
+	// Verify remaining structure
+	root := tree.GetRoot()
+	if root != nil {
+		t.Fatalf("Expected root value to be nil")
 	}
 }

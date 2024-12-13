@@ -1,4 +1,4 @@
-package golang_binary_tree_test
+package binsrch_tree_test
 
 import (
 	"errors"

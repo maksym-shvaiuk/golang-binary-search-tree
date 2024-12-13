@@ -1,12 +1,25 @@
-package golang_binary_tree_test
+package binsrch_tree_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/maksym-shvaiuk/golang-binary-search-tree/binsrch_tree"
 )
 
-func TestInsertRecursivelyBasicScenario(t *testing.T) {
+const printTreesInUnitTests = true
+
+type TestLogger struct {
+}
+
+func (l *TestLogger) Print(str string) {
+	if !printTreesInUnitTests {
+		return
+	}
+	fmt.Println(str)
+}
+
+func TestInsertIterativeBasicScenario(t *testing.T) {
 	// Comparison function for integers
 	intCmp := func(a, b int) int {
 		if a > b {
@@ -19,7 +32,7 @@ func TestInsertRecursivelyBasicScenario(t *testing.T) {
 
 	// Create a new tree
 	tree := binsrch_tree.New(intCmp)
-	tree.SetAlgo(binsrch_tree.AlgoRecursive)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 
 	// Insert a single value
 	err := tree.Insert(5)
@@ -57,8 +70,8 @@ func TestInsertRecursivelyBasicScenario(t *testing.T) {
 	tree.PrintTree(&TestLogger{})
 }
 
-// TestInsertRecursivelyIntoEmptyTree checks insertion into an empty tree.
-func TestInsertRecursivelyIntoEmptyTree(t *testing.T) {
+// TestInsertIterativeIntoEmptyTree checks insertion into an empty tree.
+func TestInsertIterativeIntoEmptyTree(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -69,7 +82,7 @@ func TestInsertRecursivelyIntoEmptyTree(t *testing.T) {
 	}
 
 	tree := binsrch_tree.New(intCmp)
-	tree.SetAlgo(binsrch_tree.AlgoRecursive)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	err := tree.Insert(10)
 	if err != nil {
 		t.Fatalf("Insert failed with error: %v", err)
@@ -79,8 +92,8 @@ func TestInsertRecursivelyIntoEmptyTree(t *testing.T) {
 	}
 }
 
-// TestInsertRecursivelyDuplicateValues checks insertion of duplicate values.
-func TestInsertRecursivelyDuplicateValues(t *testing.T) {
+// TestInsertIterativeDuplicateValues checks insertion of duplicate values.
+func TestInsertIterativeDuplicateValues(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -91,7 +104,7 @@ func TestInsertRecursivelyDuplicateValues(t *testing.T) {
 	}
 
 	tree := binsrch_tree.New(intCmp)
-	tree.SetAlgo(binsrch_tree.AlgoRecursive)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	_ = tree.Insert(10)
 	err := tree.Insert(10)
 	if err != nil {
@@ -102,8 +115,8 @@ func TestInsertRecursivelyDuplicateValues(t *testing.T) {
 	}
 }
 
-// TestInsertRecursivelyLargerValues checks insertion of values larger than the root.
-func TestInsertRecursivelyLargerValues(t *testing.T) {
+// TestInsertIterativeLargerValues checks insertion of values larger than the root.
+func TestInsertIterativeLargerValues(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -114,7 +127,7 @@ func TestInsertRecursivelyLargerValues(t *testing.T) {
 	}
 
 	tree := binsrch_tree.New(intCmp)
-	tree.SetAlgo(binsrch_tree.AlgoRecursive)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	_ = tree.Insert(10)
 	err := tree.Insert(20)
 	if err != nil {
@@ -125,8 +138,8 @@ func TestInsertRecursivelyLargerValues(t *testing.T) {
 	}
 }
 
-// TestInsertRecursivelySmallerValues checks insertion of values smaller than the root.
-func TestInsertRecursivelySmallerValues(t *testing.T) {
+// TestInsertIterativeSmallerValues checks insertion of values smaller than the root.
+func TestInsertIterativeSmallerValues(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -137,7 +150,7 @@ func TestInsertRecursivelySmallerValues(t *testing.T) {
 	}
 
 	tree := binsrch_tree.New(intCmp)
-	tree.SetAlgo(binsrch_tree.AlgoRecursive)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	_ = tree.Insert(10)
 	err := tree.Insert(5)
 	if err != nil {
@@ -148,8 +161,8 @@ func TestInsertRecursivelySmallerValues(t *testing.T) {
 	}
 }
 
-// TestInsertRecursivelyMultipleValues checks insertion of multiple values to form a balanced tree.
-func TestInsertRecursivelyMultipleValues(t *testing.T) {
+// TestInsertIterativeMultipleValues checks insertion of multiple values to form a balanced tree.
+func TestInsertIterativeMultipleValues(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -160,7 +173,7 @@ func TestInsertRecursivelyMultipleValues(t *testing.T) {
 	}
 
 	tree := binsrch_tree.New(intCmp)
-	tree.SetAlgo(binsrch_tree.AlgoRecursive)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	values := []int{10, 5, 15, 3, 7, 12, 18}
 	for _, val := range values {
 		if err := tree.Insert(val); err != nil {
@@ -177,8 +190,8 @@ func TestInsertRecursivelyMultipleValues(t *testing.T) {
 	}
 }
 
-// TestInsertRecursivelyUnbalancedTree checks the behavior with a deeply unbalanced tree.
-func TestInsertRecursivelyUnbalancedTree(t *testing.T) {
+// TestInsertIterativeUnbalancedTree checks the behavior with a deeply unbalanced tree.
+func TestInsertIterativeUnbalancedTree(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -189,7 +202,7 @@ func TestInsertRecursivelyUnbalancedTree(t *testing.T) {
 	}
 
 	tree := binsrch_tree.New(intCmp)
-	tree.SetAlgo(binsrch_tree.AlgoRecursive)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
 	values := []int{1, 2, 3, 4, 5}
 	for _, val := range values {
 		if err := tree.Insert(val); err != nil {
@@ -209,8 +222,8 @@ func TestInsertRecursivelyUnbalancedTree(t *testing.T) {
 	}
 }
 
-// TestInsertRecursivelyDataFromVideoTutorial checks the behavior with a data from the video tutorial (54).
-func TestInsertRecursivelyDataFromVideoTutorial(t *testing.T) {
+// TestInsertIterativelyMultipleValues tests multiple deletions in sequence.
+func TestInsertIterativelyMultipleValues(t *testing.T) {
 	intCmp := func(a, b int) int {
 		if a > b {
 			return 1
@@ -221,24 +234,57 @@ func TestInsertRecursivelyDataFromVideoTutorial(t *testing.T) {
 	}
 
 	tree := binsrch_tree.New(intCmp)
-	tree.SetAlgo(binsrch_tree.AlgoRecursive)
-	values := []int{60, 41, 16, 53, 46, 55, 42, 54}
-	for _, val := range values {
-		if err := tree.Insert(val); err != nil {
-			t.Fatalf("Insert failed for value %d with error: %v", val, err)
-		}
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
+
+	// Insert nodes into the tree
+	_ = tree.Insert(62)
+	_ = tree.Insert(83)
+	_ = tree.Insert(33)
+	_ = tree.Insert(92)
+	_ = tree.Insert(18)
+	_ = tree.Insert(83)
+	_ = tree.Insert(87)
+	_ = tree.Insert(46)
+	_ = tree.Insert(17)
+	_ = tree.Insert(41)
+
+	// Verify remaining structure
+	root := tree.GetRoot()
+	if root == nil || root.Val != 62 {
+		t.Fatalf("Expected root value to be 62, got: %v", root)
 	}
 
-	// Verify the tree is right-skewed
-	current := tree.GetRoot()
-	expected := 60
-	for current != nil {
-		if current.Val != expected {
-			t.Fatalf("Expected node value to be %d, got %v", expected, current.Val)
-		}
-		current = current.Right
-		expected++
+	// Left subtree
+	if root.Left == nil || root.Left.Val != 33 {
+		t.Fatalf("Expected left child of root to be 33, got: %v", root.Left)
+	}
+	if root.Left.Left == nil || root.Left.Left.Val != 18 {
+		t.Fatalf("Expected left child of node 33 to be 18, got: %v", root.Left.Left)
+	}
+	if root.Left.Left.Left == nil || root.Left.Left.Left.Val != 17 {
+		t.Fatalf("Expected left child of node 18 to be 17, got: %v", root.Left.Left.Left)
+	}
+	if root.Left.Left.Right != nil {
+		t.Fatalf("Expected right child of node 18 to be [null], got: %v", root.Left.Left.Right)
+	}
+	if root.Left.Right == nil || root.Left.Right.Val != 46 {
+		t.Fatalf("Expected right child of node 33 to be 46, got: %v", root.Left.Right)
+	}
+	if root.Left.Right.Left == nil || root.Left.Right.Left.Val != 41 {
+		t.Fatalf("Expected left child of node 46 to be 41, got: %v", root.Left.Right.Left)
+	}
+	if root.Left.Right.Right != nil {
+		t.Fatalf("Expected right child of node 46 to be [null], got: %v", root.Left.Right.Right)
 	}
 
-	tree.PrintTree(&TestLogger{})
+	// Right subtree
+	if root.Right == nil || root.Right.Val != 83 {
+		t.Fatalf("Expected right child of root to be 83, got: %v", root.Right)
+	}
+	if root.Right.Left == nil || root.Right.Left.Val != 83 {
+		t.Fatalf("Expected left child of node 83 to be 83, got: %v", root.Right.Left)
+	}
+	if root.Right.Right == nil || root.Right.Right.Val != 92 {
+		t.Fatalf("Expected right child of node 83 to be 92, got: %v", root.Right.Right)
+	}
 }

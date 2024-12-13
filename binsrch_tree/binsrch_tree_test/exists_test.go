@@ -1,4 +1,4 @@
-package golang_binary_tree_test
+package binsrch_tree_test
 
 import (
 	"testing"
@@ -132,5 +132,45 @@ func TestExistsSkewedTree(t *testing.T) {
 	// Test for a non-existing value
 	if tree.Exists(5) {
 		t.Fatalf("Expected value 5 to not exist in the tree, but it was found")
+	}
+}
+
+func TestExistsDuplicates(t *testing.T) {
+	// Comparison function for integers
+	intCmp := func(a, b int) int {
+		if a > b {
+			return 1
+		} else if a < b {
+			return -1
+		}
+		return 0
+	}
+
+	// Create a new tree
+	tree := binsrch_tree.New(intCmp)
+	tree.SetAlgo(binsrch_tree.AlgoIterative)
+
+	// Insert values into the tree
+	values := []int{10, 5, 15, 3, 7, 15, 12, 5, 18}
+	for _, val := range values {
+		err := tree.Insert(val)
+		if err != nil {
+			t.Fatalf("Insert failed for value %d with error: %v", val, err)
+		}
+	}
+
+	// Test for existing values
+	for _, val := range values {
+		if !tree.Exists(val) {
+			t.Fatalf("Expected value %d to exist in the tree, but it was not found", val)
+		}
+	}
+
+	// Test for existing values
+	existingValues := []int{15, 3, 5}
+	for _, val := range existingValues {
+		if !tree.Exists(val) {
+			t.Fatalf("Expected value %d to exist in the tree, but it was found", val)
+		}
 	}
 }
