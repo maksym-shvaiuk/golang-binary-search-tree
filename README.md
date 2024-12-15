@@ -1,45 +1,44 @@
 # golang-binary-search-tree
 
+Binary search tree that handles generic data type.
+
+Both recursive and iterative implementations for insert/delete operations are provided.
+The iterative is used by-default.
+
 ## Benchmarking
 
 ### BenchmarkInsert
 
-1 million of random integers.
+**int** data type.
+1 million of nodes in tree.
+For each run, the new random dataset is generated.
 Run the Insert() API on each integer.
-Iterative implementation is **27%** faster then recursive.
+Iterative implementation is **22%** faster then recursive.
 
 ``` bash
-➜  golang-binary-search-tree git:(main) ✗ go test -run=^$ -bench ^BenchmarkInsert$ -benchmem -benchtime=100s ./...
+go test -bench ^BenchmarkInsert$ -benchmem -benchtime=100s .
 goos: darwin
 goarch: arm64
 cpu: Apple M1 Max
-BenchmarkInsert/Iterative-10                 363         344528073 ns/op        24000049 B/op    1000000 allocs/op
-BenchmarkInsert/Recursive-10                 270         439224092 ns/op        24000035 B/op    1000000 allocs/op
-PASS
-ok      github.com/maksym-shvaiuk/golang-binary-search-tree/binsrch_tree/test     321.925s
+BenchmarkInsert/Inserting_Iterative-10               313         376289250 ns/op        24000045 B/op    1000000 allocs/op
+BenchmarkInsert/Inserting_Recursive-10               261         461329973 ns/op        24000025 B/op    1000000 allocs/op
 ```
 
-The profiling data is placed at `docs/profiling_results/insert`.
+### BenchmarkDelete
 
-#### How profiling data has been captured
+**int** data type.
+1 million of nodes in tree.
+For each run, the new random dataset is generated.
+Nodes are removed in random order.
+Insertion time on each run is excluded from benchmarking.
+Iterative implementation is **24%** faster then recursive.
 
 ``` bash
-go test -run=^$ -bench ^BenchmarkInsertRecursive -benchmem -benchtime=30s -cpuprofile=cpu_BenchmarkInsertRecursive.out -memprofile=mem_BenchmarkInsertRecursive.out ./binsrch_tree/benchmark
-go test -run=^$ -bench ^BenchmarkInsertIterative -benchmem -benchtime=30s -cpuprofile=cpu_BenchmarkInsertIterative.out -memprofile=mem_BenchmarkInsertIterative.out ./binsrch_tree/benchmark
+go test -bench ^BenchmarkDelete$ -benchmem -benchtime=10s .
+goos: darwin
+goarch: arm64
+pkg: github.com/maksym-shvaiuk/golang-binary-search-tree/binsrch_tree/binsrch_tree_benchmark_test
+cpu: Apple M1 Max
+BenchmarkDelete/Deleting_Iterative-10                 27         396712997 ns/op               0 B/op          0 allocs/op
+BenchmarkDelete/Deleting_Recursively-10               22         491970116 ns/op               0 B/op          0 allocs/op
 ```
-
-#### How to explore it in a web-browser
-
-In the first terminal run:
-
-``` bash
-go tool pprof -http=:8080 mem_BenchmarkInsertRecursive.out
-```
-
-In the second terminal run:
-
-``` bash
-go tool pprof -http=:8081 mem_BenchmarkInsertIterative.out
-```
-
-Then use the Arc Browser to get a pretty split-screen view and compare benchmarking results.
