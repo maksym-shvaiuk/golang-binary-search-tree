@@ -35,7 +35,6 @@ func (tree *Tree[T]) insertIterative(value T) {
 
 		cmpRes := tree.cmp(value, current.Val)
 
-
 		prev = current
 
 		// NOTE: value > current

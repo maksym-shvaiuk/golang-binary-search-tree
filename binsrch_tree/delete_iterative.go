@@ -68,7 +68,6 @@ func (tree *Tree[T]) deleteRootNodeIterative() {
 	}
 
 	deleteNodeTwoChildrenIterative(tree.root)
-	return
 }
 
 func deleteNodeIterative[T any](prevNode, nodeToDelete *Node[T], prevMove prevMoveDirection) {
@@ -118,8 +117,7 @@ func deleteNodeSingleChildIterative[T any](prevNode, nodeToDelete *Node[T], prev
 func deleteNodeTwoChildrenIterative[T any](nodeToDelete *Node[T]) {
 	// step 1: find node with max value in left subtree and it's parent node
 	maxNodeLeftSubTree, maxNodeLeftSubTreeParent := getMaxSubtreeNodeWithParent[T](nodeToDelete.Left)
-	
-	
+
 	// step 2: copy the value from max node of the left subtree to the nodeToDelete
 	nodeToDelete.Val = maxNodeLeftSubTree.Val
 

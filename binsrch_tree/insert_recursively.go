@@ -16,7 +16,6 @@ func insertRecursivelyInternal[T any](current *Node[T], value T, cmp func(T, T) 
 
 	cmpRes := cmp(value, current.Val)
 
-
 	// NOTE: value > current
 	if cmpRes > 0 {
 		current.Right = insertRecursivelyInternal(current.Right, value, cmp)
